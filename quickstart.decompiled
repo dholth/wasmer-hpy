@@ -1,0 +1,134 @@
+export memory memory(initial: 2, max: 0);
+
+global stack_pointer:int = 66672;
+export global ctx_for_trampolines:int = 1132;
+export global say_hello:int = 1072;
+export global dso_handle:int = 1024;
+export global data_end:int = 1136;
+export global stack_low:int = 1136;
+export global stack_high:int = 66672;
+export global global_base:int = 1024;
+export global heap_base:int = 66672;
+export global heap_end:int = 131072;
+export global memory_base:int = 0;
+export global table_base:int = 1;
+
+export table indirect_function_table:funcref(min: 3, max: 3);
+
+data rodata(offset: 1024) =
+"say_hello\00HPy Quickstart Example\00Hello world\00";
+data data(offset: 1072) =
+  "\02\00\00\00\00\04\00\00\01\00\00\00\02\00\00\00\03\00\00\00\00\00\00\00"
+  "\00\00\00\00\00\00\00\00\0a\04\00\00\00\00\00\00\00\00\00\00d\04\00\00"
+  "\00\00\00\000\04\00\00\00\00\00\00";
+
+export function wasm_call_ctors() {
+}
+
+function say_hello_impl(a:int, b:int):int {
+  var c:int = stack_pointer;
+  var d:int = 32;
+  var e:int_ptr = c - d;
+  stack_pointer = e;
+  e[4] = b;
+  e[3] = a;
+  var f:int = e[3];
+  var g:int = 1057;
+  var h:int = HPyUnicode_FromString(f, g);
+  e[6] = h;
+  var i:int = e[6];
+  var j:int = 32;
+  var k:int = e + j;
+  stack_pointer = k;
+  return i;
+}
+
+function HPyUnicode_FromString(a:int, b:int):int {
+  var c:int = stack_pointer;
+  var d:int = 16;
+  var e:{ a:int, b:int, c:int } = c - d;
+  stack_pointer = e;
+  e.b = a;
+  e.a = b;
+  var f:int_ptr = e.b;
+  var g:int = f[188];
+  var h:int = e.b;
+  var i:int = e.a;
+  var j:int = call_indirect(h, i, g);
+  e.c = j;
+  var k:int = e.c;
+  var l:int = 16;
+  var m:int = e + l;
+  stack_pointer = m;
+  return k;
+}
+
+function say_hello_trampoline(a:int):int {
+  var b:int = stack_pointer;
+  var c:int = 16;
+  var d:int_ptr = b - c;
+  stack_pointer = d;
+  d[3] = a;
+  var e:int = d[3];
+  d[0] = e;
+  var f:int = 0;
+  d[1] = f;
+  var g:int_ptr = 0;
+  var h:int = g[283];
+  var i:int = 3;
+  var j:int = 1;
+  var k:int = d;
+  HPy_CallRealFunctionFromTrampoline(h, i, j, k);
+  var l:int = d[1];
+  var m:int = 16;
+  var n:int = d + m;
+  stack_pointer = n;
+  return l;
+}
+
+function HPy_CallRealFunctionFromTrampoline(a:int, b:int, c:int, d:int) {
+  var e:int = stack_pointer;
+  var f:int = 16;
+  var g:{ a:int, b:int, c:int, d:int } = e - f;
+  stack_pointer = g;
+  g.d = a;
+  g.c = b;
+  g.b = c;
+  g.a = d;
+  var h:int_ptr = g.d;
+  var i:int = h[211];
+  var j:int = g.d;
+  var k:int = g.c;
+  var l:int = g.b;
+  var m:int = g.a;
+  call_indirect(j, k, l, m, i);
+  var n:int = 16;
+  var o:int = g + n;
+  stack_pointer = o;
+}
+
+export function get_required_hpy_major_version_quickstart():int {
+  var a:int = 0;
+  return a;
+}
+
+export function get_required_hpy_minor_version_quickstart():int {
+  var a:int = 0;
+  return a;
+}
+
+export function HPyInitGlobalContext_quickstart(a:int) {
+  var b:int = stack_pointer;
+  var c:int = 16;
+  var d:int_ptr = b - c;
+  d[3] = a;
+  var e:int = d[3];
+  var f:int_ptr = 0;
+  f[283] = e;
+}
+
+export function HPyInit_quickstart():int {
+  var a:int = 1104;
+  return a;
+}
+

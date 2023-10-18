@@ -1,0 +1,2 @@
+Use imports/ImportObject (deprecated) to expose hpy to wasm module: https://wasmerio.github.io/wasmer-python/api/wasmer/wasmer.html#Instance
+
